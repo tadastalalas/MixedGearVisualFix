@@ -44,6 +44,7 @@ namespace MixedGearVisualFix
             "exp_wrapped_boots_second",
             "fine_town_boots",
             "folded_town_boots",
+            "gladiator_warlord_boots",
             "highland_boots",
             "highland_leg_wrappings",
             "hybrid_armor_boots_b",

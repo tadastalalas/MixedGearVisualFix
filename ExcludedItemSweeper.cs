@@ -4,11 +4,6 @@ using TaleWorlds.Core;
 
 namespace MixedGearVisualFix
 {
-    /// <summary>
-    /// Removes/replaces excluded gloves and boots from a character's BATTLE equipment sets only.
-    /// Uses CharacterObject.BattleEquipments, which never contains civilian rosters, so civilian
-    /// equipment is left completely untouched.
-    /// </summary>
     public static class ExcludedItemSweeper
     {
         public static void SweepCharacter(CharacterObject? character)
@@ -21,7 +16,7 @@ namespace MixedGearVisualFix
             foreach (var equipment in battleEquipments)
             {
                 if (equipment == null) continue;
-                if (equipment.IsCivilian) continue;   // defensive: never touch civilian equipment
+                if (equipment.IsCivilian) continue;   // never touch civilian equipment
 
                 SweepEquipment(equipment);
             }

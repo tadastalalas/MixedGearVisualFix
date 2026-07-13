@@ -105,12 +105,6 @@ namespace MixedGearVisualFix
         }
     }
 
-    /// <summary>
-    /// Guarantees that no wanderer ends up with an excluded glove/boot in ANY of their
-    /// equipment sets, independent of Dress The Wanderer. Vanilla wanderer templates bake
-    /// items like "leather_gloves" into the civilian roster; this scrubs them on session
-    /// start and whenever a new hero is created.
-    /// </summary>
     public class WandererEquipmentCleanupBehavior : CampaignBehaviorBase
     {
         public override void RegisterEvents()

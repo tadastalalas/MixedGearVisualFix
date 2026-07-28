@@ -55,7 +55,7 @@ namespace MixedGearVisualFix
                     }
 
                     InformationManager.DisplayMessage(new InformationMessage(
-                        $"Invisible Items Fix: {modsDetected} detected, boot restrictions active.",
+                        $"Invisible Items Fix: {modsDetected} detected, gear compatibility rules active.",
                         Color.FromUint(0x00FF00FF)));
                 }
                 else
@@ -79,13 +79,9 @@ namespace MixedGearVisualFix
 
             if (gameStarterObject is CampaignGameStarter campaignStarter)
             {
+                CompatibleReplacementProvider.Reset();
                 campaignStarter.AddBehavior(new MixedGearVisualFix.WandererEquipmentCleanupBehavior());
             }
-        }
-
-        protected override void OnBeforeInitialModuleScreenSetAsRoot()
-        {
-            base.OnBeforeInitialModuleScreenSetAsRoot();
         }
 
         protected override void OnSubModuleUnloaded()
@@ -118,13 +114,13 @@ namespace MixedGearVisualFix
         private void OnSessionLaunched(CampaignGameStarter starter)
         {
             foreach (var hero in Hero.AllAliveHeroes.Where(h => h != null && h.IsWanderer))
-                ExcludedItemSweeper.SweepCharacter(hero.CharacterObject);
+                CompatibleGearSweeper.SweepCharacter(hero.CharacterObject);
         }
 
         private void OnHeroCreated(Hero hero, bool showNotification)
         {
             if (hero != null && hero.IsWanderer)
-                ExcludedItemSweeper.SweepCharacter(hero.CharacterObject);
+                CompatibleGearSweeper.SweepCharacter(hero.CharacterObject);
         }
     }
 }

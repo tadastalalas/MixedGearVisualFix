@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MixedGearVisualFix — manual pair exceptions.
+  Edit this file, no rebuild needed. Rules override the built-in family matrix.
+
+  ELEMENTS
+    <Ban .../>    this glove/boot may NEVER appear with this body armor
+    <Allow .../>  force-allow a pair the family matrix would ban (Ban always beats Allow)
+
+  ATTRIBUTES (all optional, all accept comma-separated lists)
+    item / items          glove or boot StringId(s)
+    itemMesh / itemMeshes glove or boot mesh name(s)  (the mesh="..." attribute in the armor mod's items XML)
+    body / bodies         body armor StringId(s)
+    bodyMesh / bodyMeshes body armor mesh name(s)
+
+  Omitting the body side = the rule applies against EVERY body armor.
+  Omitting the item side = the rule applies to EVERY glove/boot worn with that body.
+
+  EXAMPLES (remove the surrounding comment markers to activate):
+
+  1) One specific glove never with one specific body armor:
+     <Ban item="eoe_splinted_gloves_1" body="imperial_scale_armor" />
+
+  2) One glove banned with several body armors:
+     <Ban item="eoe_splinted_gloves_1" bodies="imperial_scale_armor,imperial_lamellar_armor,decorated_scale_armor" />
+
+  3) Several boots banned with one body armor:
+     <Ban items="leather_boots,strapped_leather_boots,ragged_boots" body="ta_kolontar_1" />
+
+  4) Ban by mesh (catches every item variant sharing that mesh):
+     <Ban itemMesh="eoe_plategloves_1" bodyMesh="anno_gambeson_a" />
+
+  5) A completely broken boot — ban it with everything:
+     <Ban item="some_broken_boots" />
+
+  6) Force-allow a pair the family matrix blocks:
+     <Allow item="eoe_splinted_gloves_1" body="imperial_padded_cloth" />
+-->
+<CompatibilityExceptions>
+
+</CompatibilityExceptions>

@@ -29,6 +29,12 @@ namespace MixedGearVisualFix
             EnsureBuilt();
             return Pick(_allBoots!, bodyItem, false);
         }
+        
+        internal static ItemObject? GetReplacementCivilianBoot(ItemObject? bodyItem, int? seed)
+        {
+            EnsureBuilt();
+            return Pick(_allBoots!, bodyItem, false, true, seed);
+        }
 
         private static void EnsureBuilt()
         {
@@ -52,7 +58,7 @@ namespace MixedGearVisualFix
             _allBoots = boots;
         }
 
-        private static ItemObject? Pick(List<ItemObject> pool, ItemObject? bodyItem, bool isGlove)
+                private static ItemObject? Pick(List<ItemObject> pool, ItemObject? bodyItem, bool isGlove, bool civilianOnly = false, int? seed = null)
         {
             if (pool.Count == 0) return null;
 
@@ -60,6 +66,7 @@ namespace MixedGearVisualFix
             for (int i = 0; i < pool.Count; i++)
             {
                 ItemObject candidate = pool[i];
+                if (civilianOnly && !IsCivilianMaterial(candidate)) continue;
                 bool allowed = isGlove
                     ? GearCompatibilityRules.IsGloveAllowed(bodyItem, candidate)
                     : GearCompatibilityRules.IsBootAllowed(bodyItem, candidate);
@@ -86,7 +93,15 @@ namespace MixedGearVisualFix
             for (int i = 0; i < compatible.Count; i++)
                 if (Math.Abs(compatible[i].Tierf - bodyTier) <= closest + band) finalists.Add(compatible[i]);
 
-            return finalists[MBRandom.RandomInt(finalists.Count)];
+            int index = seed != null
+                ? ((seed.Value * 31 + 101) & int.MaxValue) % finalists.Count   // salt 101: avoid correlating with CDM's own salts 1-4
+                : MBRandom.RandomInt(finalists.Count);
+            return finalists[index];
         }
+
+        private static bool IsCivilianMaterial(ItemObject item) =>
+            item.ArmorComponent != null
+            && (item.ArmorComponent.MaterialType == ArmorComponent.ArmorMaterialTypes.Cloth
+                || item.ArmorComponent.MaterialType == ArmorComponent.ArmorMaterialTypes.Leather);
     }
 }

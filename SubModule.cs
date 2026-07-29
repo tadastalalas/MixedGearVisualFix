@@ -25,8 +25,9 @@ namespace MixedGearVisualFix
                 bool universalAutoEquipmentLoaded = IsModLoaded("UniversalAutoEquipment");
                 bool balancedTournamentArmorLoaded = IsModLoaded("BalancedTournamentArmor");
                 bool banditMilitiasReduxLoaded = IsModLoaded("BanditMilitiasRedux");
+                bool cultureDiversityModLoaded = IsModLoaded("CultureDiversityMod");
 
-                if (lordsGearLoaded || dressTheWandererLoaded || universalAutoEquipmentLoaded || balancedTournamentArmorLoaded || banditMilitiasReduxLoaded)
+                if (lordsGearLoaded || dressTheWandererLoaded || universalAutoEquipmentLoaded || balancedTournamentArmorLoaded || banditMilitiasReduxLoaded || cultureDiversityModLoaded)
                 {
                     _harmony = new Harmony("MixedGearVisualFix");
                     _harmony.PatchAll(Assembly.GetExecutingAssembly());
@@ -53,6 +54,11 @@ namespace MixedGearVisualFix
                         if (!string.IsNullOrEmpty(modsDetected)) modsDetected += " & ";
                         modsDetected += "Bandit Militias Redux";
                     }
+                    if (cultureDiversityModLoaded)
+                    {
+                        if (!string.IsNullOrEmpty(modsDetected)) modsDetected += " & ";
+                        modsDetected += "Culture Diversity";
+                    }
 
                     InformationManager.DisplayMessage(new InformationMessage(
                         $"Invisible Items Fix: {modsDetected} detected, gear compatibility rules active.",
@@ -61,7 +67,7 @@ namespace MixedGearVisualFix
                 else
                 {
                     InformationManager.DisplayMessage(new InformationMessage(
-                        "Invisible Items Fix: No compatible mods detected (Lord's Gear, Dress The Wanderer, Universal Auto Equipment, Balanced Tournament Armor, or Bandit Militias Redux required).",
+                        "Invisible Items Fix: No compatible mods detected (Lord's Gear, Dress The Wanderer, Universal Auto Equipment, Balanced Tournament Armor, Bandit Militias Redux or Culture Diversity required).",
                         Color.FromUint(0xFFFF00FF)));
                 }
             }

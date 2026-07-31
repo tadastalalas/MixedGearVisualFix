@@ -17,6 +17,7 @@ namespace MixedGearVisualFix
         private static readonly (string Token, ItemFamily Family)[] ModuleTokens =
         {
             ("EOE_Armoury", ItemFamily.EOE),
+            ("Ben's Armory", ItemFamily.EOE), // Ben's Ultimate Armory: identical asymmetry to EOE
             ("Terra_Armarium", ItemFamily.Terra),
             ("Anno Domini Dark Ages", ItemFamily.Anno)
         };
